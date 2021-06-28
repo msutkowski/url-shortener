@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 
 const { PORT = 5679 } = process.env;
@@ -20,6 +21,7 @@ async function bootstrap() {
 
   app.enableCors();
 
+  app.useGlobalPipes(new ValidationPipe());
   await app.listen(PORT);
 
   console.log(`Shrtnr API is running on: ${await app.getUrl()}`);
