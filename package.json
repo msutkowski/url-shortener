@@ -1,0 +1,48 @@
+{
+  "name": "shrtnr",
+  "private": true,
+  "description": "A simple url shortener",
+  "scripts": {
+    "docker": "yarn workspace docker",
+    "docker-compose": "yarn workspace docker compose",
+    "prettier:all": "prettier --ignore-path .eslintignore \"**/*.{js,jsx,ts,tsx,graphql,md}\"",
+    "lint": "tsc -b && yarn prettier:all --check && yarn eslint .",
+    "eslint": "eslint --ext .js,.jsx,.ts,.tsx,.graphql",
+    "db": "yarn workspace db",
+    "client": "yarn workspace client",
+    "server": "yarn workspace server",
+    "test": "",
+    "start": "node ./scripts/start.js",
+    "dev": "concurrently --kill-others-on-fail \"PORT=5679 yarn workspace server start:dev\"  \"PORT=5678 yarn workspace client start\""
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0",
+    "dotenv": "^10.0.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "pg": "^8.6.0",
+    "prettier": "^2.3.2",
+    "typescript": "^4.3.4"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "prettier": {
+    "semi": true,
+    "trailingComma": "es5",
+    "proseWrap": "always",
+    "overrides": [
+      {
+        "files": [
+          "*.yml",
+          "*.yaml"
+        ],
+        "options": {
+          "printWidth": 120
+        }
+      }
+    ]
+  }
+}
