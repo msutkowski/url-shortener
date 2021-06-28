@@ -32,6 +32,28 @@ async function main() {
     "chmod o+rwx /var/run/docker.sock && chown -R node /work/node_modules /work/packages/*/node_modules",
   ]);
 
+  runSync(yarnCmd, [
+    "compose",
+    "run",
+    "-e",
+    `PROJECT_NAME=${projectName}`,
+    "server",
+    "yarn",
+    "install",
+  ]);
+
+  runSync(yarnCmd, [
+    "compose",
+    "run",
+    "-e",
+    `PROJECT_NAME=${projectName}`,
+    "server",
+    "yarn",
+    "db",
+    "p",
+    "generate",
+  ]);
+
   // Run setup as normal
   runSync(yarnCmd, [
     "compose",

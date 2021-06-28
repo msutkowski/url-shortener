@@ -27,8 +27,16 @@ To get started, please run:
 
 ```sh
 cp env.example .env # you should change the db password here, but optional as we're in a no-risk temporary container
-export UID; yarn docker setup
+yarn install
+export UID; yarn docker setup # if the container fails to come up, run `export UID; yarn docker up`, then rerun setup
+export UID; yarn docker dev # or alternatively, you can open the project in vscode and connect to the remote container at this point. See more info below
+yarn dev # once inside the dev prompt of the container.
 ```
+
+At this point, Nest and CRA will both start and the app will be accessible here:
+
+- **Client:** http://localhost:5678/
+- **API:** http://localhost:5679/
 
 **NOTE:** `export UID` is important on Linux Docker hosts, otherwise the files
 and folders created by Docker will end up owned by root, which is non-optimal.
@@ -38,7 +46,7 @@ For ease of long-term use, you should add `export UID` to your `~/.profile` or
 Once docker is setup, you can run tests, lint, etc by connecting to the server:
 
 ```sh
-export UID; yarn docker dev
+export UID; yarn docker dev # skip this if you're in the remote container
 # once connected in a bash terminal
 yarn install
 yarn lint
@@ -86,11 +94,13 @@ that version in the `server` package.
 If you run into file permissions issues for whatever reason, these commands
 should help bail you out:
 
-```sh
-chmod -R 755 .
-chown yourusername -R .
-chgrp -R yourgroup .
 ```
+chmod -R a+rX,u+rwX .
+chown yourusername:yourgroup -R .
+```
+
+> a+rX,u+rwX - for all, add read permissions and set execute on folders, for
+> user add read and write and set execute on folders
 
 ### Todos
 

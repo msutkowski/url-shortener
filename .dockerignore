@@ -1,0 +1,11 @@
+.docker
+.env
+.git
+.github
+.vscode
+
+**/.DS_Store
+*Dockerfile*
+*docker-compose*
+**/node_modules
+**/dist

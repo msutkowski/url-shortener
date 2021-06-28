@@ -13,6 +13,7 @@
     "server": "yarn workspace server",
     "test": "",
     "start": "node ./scripts/start.js",
+    "setup": "node ./scripts/setup_db.js",
     "dev": "concurrently --kill-others-on-fail \"PORT=5679 yarn workspace server start:dev\"  \"PORT=5678 yarn workspace client start\""
   },
   "devDependencies": {
