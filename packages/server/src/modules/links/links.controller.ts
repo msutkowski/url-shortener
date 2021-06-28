@@ -1,3 +1,4 @@
+import { CreateDto } from './dto/create.dto';
 import { LinksService } from './links.service';
 import {
   Controller,
@@ -66,7 +67,7 @@ export class LinksController {
     type: Link,
   })
   @ApiBody({ type: CreateLinkRequest })
-  async create(@Body() linkData: { long_url: string }): Promise<LinkModel> {
+  async create(@Body() linkData: CreateDto): Promise<LinkModel> {
     return this.linkService.create(linkData);
   }
 
