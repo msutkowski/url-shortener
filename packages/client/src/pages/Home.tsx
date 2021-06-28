@@ -7,6 +7,7 @@ import {
   HStack,
   Text,
   Fade,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { UrlGeneratorForm } from "../components/generator/UrlGeneratorForm";
@@ -24,6 +25,7 @@ const getHashesFromLocalStorage = () => {
 };
 
 export const Home = () => {
+  const toast = useToast();
   const [createLink] = useCreateLinkMutation();
   const [recentHashes, setRecentHashes] = useState<LinkModel[]>(
     getHashesFromLocalStorage()
@@ -58,23 +60,23 @@ export const Home = () => {
       <Box bg="purple.800" p={6}>
         <Container maxW="6xl">
           <UrlGeneratorForm
-            onSubmit={({ url }) =>
-              createLink({
-                createLinkRequest: {
-                  long_url: url,
-                },
-              })
-                .unwrap()
-                .then((result) => {
-                  const updatedHashes = [
-                    ...getHashesFromLocalStorage(),
-                    result,
-                  ];
-                  setRecentHashes((prev) => [...prev, result]);
-                  localStorage.setItem("hashes", JSON.stringify(updatedHashes));
-                })
-                .catch(console.error)
-            }
+            onSubmit={async ({ url }) => {
+              try {
+                const result = await createLink({
+                  createLinkRequest: {
+                    long_url: url,
+                  },
+                }).unwrap();
+                const updatedHashes = [...getHashesFromLocalStorage(), result];
+                setRecentHashes((prev) => [...prev, result]);
+                localStorage.setItem("hashes", JSON.stringify(updatedHashes));
+              } catch (err) {
+                toast({
+                  status: "error",
+                  description: err.message || "There was an error, try again.",
+                });
+              }
+            }}
           />
           <Fade in={recentHashes.length > 0}>
             <Box as="ul" bg="white" p={4} borderRadius="md" mt={4}>
