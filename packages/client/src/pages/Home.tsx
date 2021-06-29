@@ -57,8 +57,8 @@ export const Home = () => {
           </HStack>
         </Center>
       </Container>
-      <Box bg="purple.800" p={6}>
-        <Container maxW="6xl">
+      <Box bg="purple.800" p={[0, 2, 6]}>
+        <Container maxW="6xl" p={[2, 2, 6]}>
           <UrlGeneratorForm
             onSubmit={async ({ url }) => {
               try {

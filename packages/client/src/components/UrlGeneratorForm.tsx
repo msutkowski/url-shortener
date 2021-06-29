@@ -1,4 +1,4 @@
-import { Alert, HStack, Box, Input, Button } from "@chakra-ui/react";
+import { Alert, Stack, Box, Input, Button } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -28,7 +28,7 @@ export const UrlGeneratorForm = ({ onSubmit }: Props) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} data-testid="url-generator-form">
-      <HStack spacing={4} flex="auto">
+      <Stack spacing={4} flex="auto" direction={{ base: "column", md: "row" }}>
         <Box flex="4">
           <Input
             placeholder="Shorten your link"
@@ -49,7 +49,7 @@ export const UrlGeneratorForm = ({ onSubmit }: Props) => {
             Shorten
           </Button>
         </Box>
-      </HStack>
+      </Stack>
       {errors.url?.message && (
         <Alert status="warning" borderRadius={4} mt={4}>
           {errors.url && errors.url.message}
