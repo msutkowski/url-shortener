@@ -1,0 +1,47 @@
+name: Build
+on: [push]
+defaults:
+  run:
+    working-directory: ./packages/server
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # Docker Hub image that `container-job` executes in
+    container: node:14
+
+    # Service containers to run with `container-job`
+    services:
+      postgres:
+        image: postgres:10.16 # heroku version
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      # Downloads a copy of the code in your repository before running CI tests
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: .yarn/cache
+          key: yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: yarn-
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test
+        env:
+          DATABASE_URL: postgres://postgres:postgres@postgres:${{ job.services.postgres.ports[5432] }}/test
+          DATABASE_URL_TEST: postgres://postgres:postgres@postgres:${{ job.services.postgres.ports[5432] }}/test
