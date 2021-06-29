@@ -16,7 +16,7 @@ import {
   // IoMdAdd,
   IoMdClose,
 } from "react-icons/io";
-import { ShrtnrIcon } from "../../theme";
+import { ShrtnrIcon } from "../theme";
 
 // Feel free to add some more paths for all of the cool pages you could make!
 const pathToTitle: Record<string, string> = {

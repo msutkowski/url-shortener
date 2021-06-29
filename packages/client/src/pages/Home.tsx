@@ -10,10 +10,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { UrlGeneratorForm } from "../components/generator/UrlGeneratorForm";
+import { UrlGeneratorForm } from "../components/UrlGeneratorForm";
 import { useCreateLinkMutation } from "../services/api";
 import { Link as LinkModel } from "../services/api.generated";
-import { RecentLinkItem } from "../components/history/RecentLinkItem";
+import { RecentLinkItem } from "../components/RecentLinkItem";
 
 const getHashesFromLocalStorage = () => {
   let currentHashes = [];

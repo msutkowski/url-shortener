@@ -34,7 +34,7 @@
   "scripts": {
     "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --runInBand",
     "eject": "react-scripts eject",
     "generate:api-client": "npx @rtk-incubator/rtk-query-codegen-openapi --file ./src/services/api.generated.ts --hooks http://localhost:5679/api-json --baseQuery ./src/services/baseQuery.ts --baseUrl fakeurl.com"
   },

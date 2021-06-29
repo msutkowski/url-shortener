@@ -18,7 +18,7 @@ export const api = enhancedApi.injectEndpoints({
     // This is a little hacky, but necessary. This is the easiest way for us to check a link
     // and have access to the entity immediately in order to redirect.
     checkCode: build.mutation<ReadLinkApiResponse, string>({
-      query: (code) => `/check?code=${code}`,
+      query: (hash) => `/check?hash=${hash}`,
     }),
   }),
   overrideExisting: false,

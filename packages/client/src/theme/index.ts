@@ -17,5 +17,6 @@ const config = {
   },
 };
 
-export default extendTheme(config);
+export const theme = extendTheme(config);
+export default theme;
 export * from "./icons";

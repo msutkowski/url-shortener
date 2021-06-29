@@ -1,4 +1,4 @@
-import Navigation from "./components/navigation/Navigation";
+import Navigation from "./components/Navigation";
 import { Switch, Route } from "react-router-dom";
 import loadable from "@loadable/component";
 import Redirector from "./components/Redirector";
