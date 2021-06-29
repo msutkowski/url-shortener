@@ -2,9 +2,10 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Link, Prisma } from 'db';
 import { nanoid } from 'nanoid';
 
+import { ShowDto } from './dto/show.dto';
 import { PrismaService } from '../../prisma.service';
 
-const { API_URL } = process.env;
+const { APP_URL } = process.env;
 
 @Injectable()
 export class LinksService {
@@ -51,7 +52,7 @@ export class LinksService {
 
   async create(
     data: Omit<Prisma.LinkCreateInput, 'hash' | 'link'>,
-  ): Promise<Link> {
+  ): Promise<ShowDto> {
     // Just a quick explanation here: two scenarios could arise
     // 1. We could SHA the provided url and check for existing ones, then just return it.
     // 2. We can do what we're doing here, and just create new records, with the thought being that if links were ever
@@ -59,7 +60,7 @@ export class LinksService {
     // At that point, we could do the SHA check, provide contextual data back to the UI, and allow for a 'force create'.
 
     const hash = this.generateShortCode();
-    const link = `${API_URL}/${hash}`;
+    const link = `${APP_URL}/${hash}`;
 
     const record = { ...data, hash, link };
 

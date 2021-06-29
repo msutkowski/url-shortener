@@ -27,7 +27,7 @@ export const UrlGeneratorForm = ({ onSubmit }: Props) => {
   });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} data-testid="url-generator-form">
       <HStack spacing={4} flex="auto">
         <Box flex="4">
           <Input

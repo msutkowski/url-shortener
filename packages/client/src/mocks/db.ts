@@ -1,7 +1,7 @@
 import { factory, primaryKey } from "@mswjs/data";
 
 export const db = factory({
-  // Create a "link" model,
+  // Create a "link" model that matches our DTO
   link: {
     id: primaryKey(String),
     long_url: String,
@@ -9,3 +9,5 @@ export const db = factory({
     hash: String,
   },
 });
+
+export default db;
