@@ -48,8 +48,13 @@ jobs:
       - name: Lint
         run: yarn lint
 
-      - name: Test Server
+      - name: Test server
         run: yarn server test
         env:
           DATABASE_URL: postgres://postgres:postgres@postgres:${{ job.services.postgres.ports[5432] }}/test
           DATABASE_URL_TEST: postgres://postgres:postgres@postgres:${{ job.services.postgres.ports[5432] }}/test
+
+      - name: Test client
+        run: yarn client test
+        env:
+          REACT_APP_API_URL: http://example.com
