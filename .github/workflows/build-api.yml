@@ -58,3 +58,4 @@ jobs:
         run: yarn client test
         env:
           REACT_APP_API_URL: http://example.com
+          SKIP_PREFLIGHT_CHECK: true

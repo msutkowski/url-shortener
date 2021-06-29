@@ -8,6 +8,10 @@ React consumption _(useXQuery, useXMutation)_ by leveraging
 [redux-toolkit/query](https://redux-toolkit.js.org/rtk-query/overview) and
 [rtk-query-codgen](https://github.com/rtk-incubator/rtk-query-codegen).
 
+The latest version of the `main` branch can be seen running at
+[https://go.msutkowski.com](https://go.msutkowski.com) - it's deployed
+automatically via Cloudflare Pages and Heroku.
+
 ### Development
 
 Requires:
